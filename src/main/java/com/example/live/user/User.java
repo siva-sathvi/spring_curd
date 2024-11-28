@@ -1,17 +1,26 @@
 package com.example.live.user;
-
+import jakarta.validation.constraints.Pattern;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "users")
+@Table(name = "user_details")
 public class User {
   
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.IDENTITY) 
   private Long id;
+  private String status;
+ // @Column(name = "name")
+ // private String name;
+ 
+  @Column(name = "first_name")
+  @Pattern(regexp = "^[A-Za-z ]+$", message = "First name cannot contain numbers or special characters")
+  private String firstName;
 
-  @Column(name = "name")
-  private String name;
+  @Column(name = "last_name")
+  @Pattern(regexp = "^[A-Za-z ]+$", message = "First name cannot contain numbers or special characters")
+  private String lastName;
+
 
   @Column(name = "email")
   private String email;
@@ -26,12 +35,25 @@ public class User {
     this.id = id;
   }
 
-  public String getName() {
-    return name;
+ // public String getName() {
+  //  return name;
+ // }
+
+  
+ public String getFirstName() {
+   return firstName;
+ }
+
+  public void setFirstName(String firstName) {
+      this.firstName = firstName;
   }
 
-  public void setName(String name) {
-    this.name = name;
+  public String getLastName() {
+      return lastName;
+  }
+
+  public void setLastName(String lastName) {
+      this.lastName = lastName;
   }
 
   public String getEmail() {
@@ -40,5 +62,12 @@ public class User {
 
   public void setEmail(String email) {
     this.email = email;
+  }
+  public String getStatus() {
+      return status;
+  }
+
+  public void setStatus(String status) {
+      this.status = status;
   }
 }
